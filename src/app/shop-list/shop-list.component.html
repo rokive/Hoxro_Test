@@ -1,0 +1,9 @@
+<div class="row mt-4">
+  <div class="col-12 text-center">
+      <app-inline-edit [(ngModel)]="name" label="Name" [required]="true" type="text">
+        </app-inline-edit>
+  </div>
+  <div class="col-12">
+    <item *ngFor="let item of itemList" [item]="item" [isAdd]="false"></item>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-12 text-center">
+    <b>Available Products</b>
+  </div>
+  <div class="col-12">
+        <input class="form-control" placeholder="Search your item" [(ngModel)]="query">
+  </div>
+  <div class="col-12">
+        <item *ngFor="let item of itemList | search:'gtin14,name':query" [item]="item" [isAdd]="true"></item>
+  </div>
+</div>
+
+
