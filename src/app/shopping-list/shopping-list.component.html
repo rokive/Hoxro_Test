@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-12 text-left">
+          <ul class="list-group">
+            <li *ngFor="let shop of shopList" class="list-group-item">{{shop.name}}<div class="text-right"><a class="btn btn-info" routerLinkActive="active" routerLink="/add-shop-item/{{shop.id}}" >Home</a></div></li>
+          
+          </ul>
+        
+          
+    </div>
+</div>

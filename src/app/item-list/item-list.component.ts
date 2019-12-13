@@ -1,6 +1,6 @@
 import { Item } from './../shared/models/item.interface';
-import { Component, OnInit } from '@angular/core';
-import { ItemService } from '../shared/services/item.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { AllService } from '../shared/services/all.service';
 
 @Component({
   selector: 'item-list',
@@ -8,11 +8,12 @@ import { ItemService } from '../shared/services/item.service';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-  itemList:Item[]=null; 
-  constructor(private itemService:ItemService) { }
+  itemList:Item[]=null;
+  @Input() shopid:number; 
+  constructor(private allService:AllService) { }
 
   ngOnInit() {
-    this.itemService.getAllItem().subscribe((result:Item[])=>{
+    this.allService.getAllProduct().subscribe((result:Item[])=>{
       this.itemList=result
       console.log(this.itemList);
     })

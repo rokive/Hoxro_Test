@@ -6,7 +6,7 @@
         <input class="form-control" placeholder="Search your item" [(ngModel)]="query">
   </div>
   <div class="col-12">
-        <item *ngFor="let item of itemList | search:'gtin14,name':query" [item]="item" [isAdd]="true"></item>
+        <item *ngFor="let item of itemList | search:'id,name':query"  [item]="item" [shopid]="shopid" [isAdd]="true"></item>
   </div>
 </div>
 

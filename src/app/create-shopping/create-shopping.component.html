@@ -1,0 +1,16 @@
+<div class="row">
+  <form #shop="ngForm" novalidate (ngSubmit)="addShop(shop)" class="p-2">
+    <div class="col-12">
+      <input class="form-control" placeholder="Add your shop" [(ngModel)]="shop.name" #name="ngModel" [ngModelOptions]="{standalone: true}" required>
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+          <small *ngIf="name.errors.required">
+            *
+          </small>
+        </div>
+    </div>
+    <div class="col-5 mt-1">
+        <input type="submit" name="submit" id="submit" class="btn btn-primary btn-block"
+              [disabled]="shop.invalid" value="Add">
+    </div>
+  </form>
+</div>

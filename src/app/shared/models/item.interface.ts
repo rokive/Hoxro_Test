@@ -1,4 +1,4 @@
 export interface Item {
-    gtin14:string,
+    id:number,
     name:string
 }

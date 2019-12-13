@@ -1,6 +1,7 @@
 import { Item } from './../shared/models/item.interface';
 import { Component, OnInit, Input } from '@angular/core';
-import { ItemService } from '../shared/services/item.service';
+import { AllService } from '../shared/services/all.service';
+import { ShopItem } from '../shared/models/shop-item.interface';
 
 @Component({
   selector: 'item',
@@ -10,17 +11,33 @@ import { ItemService } from '../shared/services/item.service';
 export class ItemComponent implements OnInit {
   @Input() isAdd = false;
   @Input() item:Item;
-  
-  constructor(private itemService:ItemService) { }
+  @Input() shopid:number;
+  shopItem:ShopItem={shoppingId:0,itemId:0}
+  constructor(private allService:AllService) { }
 
   ngOnInit() {
   }
 
   add(item){
-    console.log(item);
-    this.itemService.addItemInShoppingList(item)
+     console.log(item.id+" "+this.shopid);
+     this.shopItem.itemId=item.id;
+     this.shopItem.shoppingId=this.shopid;
+    this.allService.addShoppingItem(this.shopItem).subscribe(result=>{
+      console.log(result)
+      this.allService.updateList();
+    },error=>{
+      console.log(error)
+    });
   }
   remove(item){
-    this.itemService.removeItemInShoppingList(item);
+    console.log(item.id+this.shopid);
+    this.shopItem.itemId=item.id;
+     this.shopItem.shoppingId=this.shopid;
+    this.allService.removeShoppingItem(this.shopItem).subscribe(result=>{
+      console.log(result)
+      this.allService.updateList();
+    },error=>{
+      console.log(error)
+    });;
   }
 }

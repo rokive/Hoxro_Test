@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ShopItem } from './../shared/models/shop-item.interface';
+import { AllService } from './../shared/services/all.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { Shopping } from '../shared/models/shopping.interface';
-import { ItemService } from '../shared/services/item.service';
 import { Item } from '../shared/models/item.interface';
+
 
 @Component({
   selector: 'shop-list',
@@ -9,19 +11,46 @@ import { Item } from '../shared/models/item.interface';
   styleUrls: ['./shop-list.component.css']
 })
 export class ShopListComponent implements OnInit {
-  shopping:Shopping;
-  itemList:Item[]=null; 
+  shopping: Shopping={id:0,name:""};
+  // shopItemList:ShopItem[]=[]
+  itemList: Item[] = [];
   name: string = 'Defualt';
-  constructor(private itemService:ItemService) { }
+  @Input() shopid:number;
+  constructor(private allService: AllService) {
+
+  }
 
   ngOnInit() {
-    this.itemService.update$.subscribe(result=>{
-      this.shopping=result;
-      this.itemList=this.shopping.itemList;
-      console.log(this.shopping)
+    this.allService.getShopping(this.shopid).subscribe(result=>{
+        this.name=result.name;
+    },
+    error=>{
+
+    });
+    this.allService.update$.subscribe(result => {
+     
+      this.getAllItem();
     })
- 
-  
+
+
   }
- 
+  update(value:string){
+    this.shopping.id=this.shopid;
+    this.shopping.name=value;
+    this.allService.updateShopping(this.shopping).subscribe(result=>{
+
+    },error=>{
+
+    });
+  }
+  getAllItem() {
+
+    this.allService.getAllShoppingItem(this.shopid).subscribe(result => {
+     this.itemList = result;
+    
+    }, error => {
+
+    });
+   
+  }
 }

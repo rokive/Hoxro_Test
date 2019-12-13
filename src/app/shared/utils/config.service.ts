@@ -6,7 +6,7 @@ export class ConfigService {
     _appUrl: string;
     constructor() {
 
-        this._apiURI = 'assets/data.json';
+        this._apiURI = 'https://localhost:5001/api';
         this._appUrl = "http://localhost:4200";
     }
 
